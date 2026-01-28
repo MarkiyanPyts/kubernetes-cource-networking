@@ -6,6 +6,8 @@ services:
     build: ./users-api
     ports: 
       - "8080:8080"
+    environment:
+      AUTH_ADDRESS: auth # service name as hostname in docker-compose network ... in docker-compose env vars is not needed because we can use service name directly. But in kubernetes we need to set it via env var
   tasks:
     build: ./tasks-api
     ports: 
