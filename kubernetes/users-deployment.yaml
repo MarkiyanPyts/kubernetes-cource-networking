@@ -18,5 +18,3 @@ spec:
         env:
         - name: AUTH_ADDRESS
           value: localhost
-      - name: auth
-        image: docker.io/pytsmarkiyan/kub-demo-auth:latest
