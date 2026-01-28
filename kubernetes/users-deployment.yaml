@@ -17,4 +17,5 @@ spec:
         image: docker.io/pytsmarkiyan/kub-demo-users:latest
         env:
         - name: AUTH_ADDRESS
-          value: localhost
+          # value: "10.100.59.74"
+          value: "auth-service.default" # service name in kubernetes cluster DNS + namespace
