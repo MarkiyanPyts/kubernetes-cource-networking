@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend ## selects pods with label app: frontend
+  #type: ClusterIP ## default type, exposes the service on a cluster-internal IP, making it only reachable from within the cluster
+  type: LoadBalancer ## exposes the service externally using a cloud provider's load balancer
+  ports:
+    - protocol: TCP
+      port: 80 ## port exposed by the service, accessible within the cluster
+      targetPort: 80 ## port on which the container is listening. 80 because our app is configured to listen on this port

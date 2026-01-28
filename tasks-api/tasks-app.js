@@ -11,6 +11,13 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  next();
+})
+
 const extractAndVerifyToken = async (headers) => {
   if (!headers.authorization) {
     throw new Error('No token provided.');
@@ -18,7 +25,6 @@ const extractAndVerifyToken = async (headers) => {
   const token = headers.authorization.split(' ')[1]; // expects Bearer TOKEN
 
   const response = await axios.get(`http://${process.env.AUTH_ADDRESS}/verify-token/` + token);
-  console.log('Token verification response:', response.data.uid);
   return response.data.uid;
 };
 
